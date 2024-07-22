@@ -27,7 +27,7 @@ namespace ToDoList.Classes
         {
             var tarefa = Tarefas.FirstOrDefault(t => t.Id == id);
 
-            if (tarefa == null)
+            if (tarefa != null)
             {
                 tarefa.Descricao = descricao;
                 tarefa.Concluida = concluido;
@@ -38,7 +38,8 @@ namespace ToDoList.Classes
         {
             var tarefa = Tarefas.FirstOrDefault(t => t.Id == id);
 
-            tarefa.Concluida = true;
+            if (tarefa != null)
+                tarefa.Concluida = true;
         }
 
         public void RemoverTarefa(int id)

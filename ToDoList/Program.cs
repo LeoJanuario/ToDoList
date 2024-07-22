@@ -2,14 +2,15 @@
 
 class Program
 {
-   
     static void Main(string[] args)
     {
         GerenciadorDeTarefas gerenciador = new GerenciadorDeTarefas();
 
+        ExibirMenu();
+
         void ExibirLogo()
         {
-            Console.WriteLine("""
+            Console.WriteLine(@"
 
     ████████╗░█████╗░  ██████╗░░█████╗░  ██╗░░░░░██╗░██████╗████████╗
     ╚══██╔══╝██╔══██╗  ██╔══██╗██╔══██╗  ██║░░░░░██║██╔════╝╚══██╔══╝
@@ -17,15 +18,18 @@ class Program
     ░░░██║░░░██║░░██║  ██║░░██║██║░░██║  ██║░░░░░██║░╚═══██╗░░░██║░░░
     ░░░██║░░░╚█████╔╝  ██████╔╝╚█████╔╝  ███████╗██║██████╔╝░░░██║░░░
     ░░░╚═╝░░░░╚════╝░  ╚═════╝░░╚════╝░  ╚══════╝╚═╝╚═════╝░░░░╚═╝░░░
-    """);
+    ");
         }
+
         void ExibirMenu()
         {
+            ExibirLogo();
+
             Console.WriteLine("1. Adicionar Tarefa");
             Console.WriteLine("2. Listar Tarefas");
             Console.WriteLine("3. Atualizar Tarefa");
             Console.WriteLine("4. Remover Tarefa");
-            Console.WriteLine("5. Remover Tarefa");
+            Console.WriteLine("5. Concluir Tarefa");
             Console.WriteLine("6. Sair");
             Console.Write("Escolha uma opção: ");
             var opcao = Console.ReadLine();
@@ -37,7 +41,7 @@ class Program
                     var descricao = Console.ReadLine();
                     gerenciador.AdicionarTarefa(descricao);
                     Console.WriteLine($"A tarefa foi registrada com sucesso!");
-                    Thread.Sleep(4000);
+                    Thread.Sleep(2000);
                     Console.Clear();
                     ExibirMenu();
                     break;
@@ -47,7 +51,7 @@ class Program
                     {
                         Console.WriteLine($"{tarefa.Id}. {tarefa.Descricao} - {(tarefa.Concluida ? "Concluída" : "Pendente")}");
                     }
-                    Console.WriteLine("Digite uma tecla para votar ao menu principal");
+                    Console.WriteLine("Digite uma tecla para voltar ao menu principal");
                     Console.ReadKey();
                     Console.Clear();
                     ExibirMenu();
@@ -60,8 +64,8 @@ class Program
                     Console.Write("A tarefa está concluída? (s/n): ");
                     var concluida = Console.ReadLine().ToLower() == "s";
                     gerenciador.AtualizarTarefa(idAtualizar, novaDescricao, concluida);
-                    Console.WriteLine($"A tarefa foi registrada com sucesso!");
-                    Thread.Sleep(4000);
+                    Console.WriteLine($"A tarefa foi atualizada com sucesso!");
+                    Thread.Sleep(2000);
                     Console.Clear();
                     ExibirMenu();
                     break;
@@ -70,29 +74,28 @@ class Program
                     var idRemover = int.Parse(Console.ReadLine());
                     gerenciador.RemoverTarefa(idRemover);
                     Console.WriteLine($"A tarefa foi removida com sucesso!");
-                    Thread.Sleep(4000);
+                    Thread.Sleep(2000);
                     Console.Clear();
                     ExibirMenu();
                     break;
                 case "5":
-                    Console.WriteLine("Digite o ID da tarefa que deseja concluir");
+                    Console.WriteLine("Digite o ID da tarefa que deseja concluir: ");
                     var idConcluir = int.Parse(Console.ReadLine());
                     gerenciador.ConcluirTarefa(idConcluir);
-                    Console.WriteLine($"A tarefa foi removida com sucesso!");
-                    Thread.Sleep(4000);
+                    Console.WriteLine($"A tarefa foi concluída com sucesso!");
+                    Thread.Sleep(2000);
                     Console.Clear();
                     ExibirMenu();
-                    break ;
+                    break;
                 case "6":
                     return;
                 default:
                     Console.WriteLine("Opção inválida. Tente novamente.");
-                    Thread.Sleep(4000);
+                    Thread.Sleep(2000);
                     Console.Clear();
                     ExibirMenu();
                     break;
             }
-
         }
     }
 }
